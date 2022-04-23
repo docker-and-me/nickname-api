@@ -1,24 +1,23 @@
 package com.container.app.myrestapp.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table (name = "humans")
 public class Human {
     private int id;
     private String fullName;
+    private String nickName;
 
     public Human(){}
 
-    public Human(int id, String name){
-        this.id = id;
-        this.fullName = name;
+    public Human(String fullName, String nickName){
+        this.fullName = fullName;
+        this.nickName = nickName;
     }
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     public int getId() {
         return id;
@@ -28,13 +27,25 @@ public class Human {
         this.id = id;
     }
 
-    @Column(name = "name", nullable = false )
+    @Column(name = "fullname", nullable = false )
     public String getFullName() {
         return fullName;
     }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    @Column(name = "nickname", nullable = false )
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        if (nickName == null || "".equals(nickName)){
+            this.nickName = getFullName();
+        }
+        this.nickName = nickName;
     }
 
     @Override

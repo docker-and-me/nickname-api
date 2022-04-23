@@ -5,17 +5,29 @@ import com.container.app.myrestapp.repo.HumanRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class HumanService {
 
     @Autowired
     private HumanRepo humanRepo;
 
-    public void saveHuman(Human human){
-        humanRepo.save(human);
+    public int saveHuman(Human human){
+        Human newHuman = humanRepo.save(human);
+        System.out.println(newHuman.getFullName());
+        System.out.println(newHuman.getId());
+        return newHuman.getId();
     }
 
-    public Iterable<Human> getAllHuman(){
-        return humanRepo.findAll();
+    public List<Human> getAllHumans(){
+        List<Human> humans = new ArrayList<>();
+        Iterable<Human> iHumans = humanRepo.findAll();
+
+        for (Human human : iHumans){
+            humans.add(human);
+        }
+        return humans;
     }
 }
