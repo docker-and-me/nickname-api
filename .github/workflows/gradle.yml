@@ -7,10 +7,6 @@
 
 name: nickname-api build
 
-env:
-  DOCKER_USER: ${{ secrets.DOCKER_HUB_USERNAME }}
-  DOCKER_PASS: ${{ secrets.DOCKER_HUB_PASSWORD }}
-
 on:
   push:
     branches: [ master ]
@@ -52,8 +48,6 @@ jobs:
     - name: Build and Push
       uses: docker/build-push-action@v2
       with:
+        image: tj1283/nickname-app
         registry: docker.io
-        context: .
-        file: ./Dockerfile
-        push: true
-        tags: $DOCKER_USER/nickname-api:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nickname-api:latest
