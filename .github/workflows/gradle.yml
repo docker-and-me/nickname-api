@@ -36,18 +36,21 @@ jobs:
       with:
         arguments: build
 
-    - name: Login to Docker hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_HUB_USERNAME }}
-        password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+  image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-    - name: Setup Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    - name: Build and Push
-      uses: docker/build-push-action@v2
-      with:
-        image: tj1283/nickname-app
-        registry: docker.io
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nickname-api:latest
+      - name: Build and Push
+        uses: docker/build-push-action@v2
+        with:
+          image: tj1283/nickname-app
+          registry: docker.io
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nickname-api:latest
