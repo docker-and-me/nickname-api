@@ -22,8 +22,8 @@ jobs:
 
     steps:
       - name: Running branch name
-        run: echo ${GITHB_REF_NAME}
-        
+        run: echo ${GITHUB_REF_NAME}
+
       - name: Checkout repo
         uses: actions/checkout@v3
 
