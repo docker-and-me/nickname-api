@@ -43,4 +43,3 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nickname-api:latest
