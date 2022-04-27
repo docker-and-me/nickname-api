@@ -37,7 +37,7 @@ jobs:
 
       - name: Set Docker image tag
         run: |
-          echo running on branch ... $GITHUB_HEAD_REF
+          echo running on branch ... ${GITHUB_HEAD_REF}
           if [ $GITHUB_HEAD_REF == "master" ]
           then
             echo setting DOCKER_TAG to latest
