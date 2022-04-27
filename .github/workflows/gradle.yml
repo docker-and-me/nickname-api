@@ -38,18 +38,17 @@ jobs:
       - name: Set Docker image tag
         shell: bash
         run: |
-          echo running on branch ... $GITHUB_HEAD_REF
-          echo running on branch ... $GITHUB_REF
-          if [ $GITHUB_HEAD_REF == "master" ]
+          echo running on branch ... $GITHUB_REF##*/
+          if [ ${$GITHUB_REF##*/} == "master" ]
           then
             echo setting DOCKER_TAG to latest
             echo "DOCKER_TAG=latest" >> $GITHUB_ENV
           else
-            echo setting DOCKER_TAG to $GITHUB_HEAD_REF
-            echo "DOCKER_TAG=$GITHUB_HEAD_REF" >> $GITHUB_ENV
+            echo setting DOCKER_TAG to ${$GITHUB_REF##*/}
+            echo "DOCKER_TAG=${$GITHUB_REF##*/}" >> $GITHUB_ENV
           fi
 
-          echo value = $GITHUB_HEAD_REF
+          echo value = ${$GITHUB_REF##*/}
 
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
