@@ -34,8 +34,10 @@ jobs:
 
       - name: Show environment variables
         shell: bash
+        env:
+          ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
         run: |
-          echo value = ${{ secrets.ARTIFACTORY_CONTEXTURL }}
+          echo value = $ARTIFACTORY_CONTEXTURL
           echo user -> ${{ secrets.DOCKER_HUB_USERNAME }}
 
       - name: Build with Gradle
