@@ -1,12 +1,56 @@
+buildscript {
+	dependencies {
+		//Check for the latest version here: http://plugins.gradle.org/plugin/com.jfrog.artifactory
+		classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4+"
+	}
+}
+
 plugins {
 	id 'org.springframework.boot' version '2.6.3'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
+	id 'maven-publish'
+	id 'com.jfrog.artifactory' version '4+'
 }
 
 group = 'com.container.app'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
+
+artifactory {
+	contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+	publish {
+		repository {
+			repoKey = 'tj-gradle-dev-local'
+			username = "${artifactory_user}"
+			password = "${artifactory_password}"
+			maven = true
+		}
+		defaults {
+			publications ('mavenJava')
+		}
+	}
+	resolve {
+		repository {
+			repoKey = 'tj-gradle-dev'
+			username = "${artifactory_user}"
+			password = "${artifactory_password}"
+			maven = true
+		}
+	}
+}
+
+artifactoryPublish {
+	dependsOn jar
+}
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+}
 
 repositories {
 	mavenCentral()
