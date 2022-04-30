@@ -7,9 +7,6 @@
 
 name: nickname-api build
 
-env:
-  artifactory_contextUrl: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
-
 on:
   push:
     branches: [ master, feature-* ]
@@ -36,7 +33,7 @@ jobs:
       - name: Show environment variables
         shell: bash
         run: |
-          echo value = "$artifactory_contextUrl"
+          echo value = ${{ secrets.ARTIFACTORY_CONTEXTURL }}
 
       - name: Build with Gradle
         run: ./gradlew clean build
