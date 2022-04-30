@@ -35,7 +35,7 @@ jobs:
 
       - uses: jfrog/setup-jfrog-cli@v2
         env:
-          JF_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          JF_ENV_ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
       - run: |
           # Ping the server
           jf rt ping
