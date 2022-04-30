@@ -7,6 +7,9 @@
 
 name: nickname-api build
 
+env:
+  artifactory_contextUrl: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
+
 on:
   push:
     branches: [ master, feature-* ]
@@ -29,6 +32,9 @@ jobs:
         with:
           java-version: 17
           distribution: 'adopt'
+
+      - name: Show environment variables
+        run: echo ${artifactory_contextUrl}
 
       - name: Build with Gradle
         run: ./gradlew clean build
