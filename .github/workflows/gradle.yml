@@ -34,7 +34,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Show environment variables
-        run: echo ${artifactory_contextUrl}
+        run: echo $artifactory_contextUrl
 
       - name: Build with Gradle
         run: ./gradlew clean build
