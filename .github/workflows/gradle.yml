@@ -35,7 +35,7 @@ jobs:
 
       - name: Show environment variables
         shell: bash
-        run: echo $artifactory_contextUrl
+        run: echo value = ${artifactory_contextUrl}
 
       - name: Build with Gradle
         run: ./gradlew clean build
