@@ -18,7 +18,7 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
 artifactory {
-	contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+	contextUrl = artifactory_contextUrl   //The base Artifactory URL if not overridden by the publisher/resolver
 	publish {
 		repository {
 			repoKey = 'tj-gradle-dev-local'
