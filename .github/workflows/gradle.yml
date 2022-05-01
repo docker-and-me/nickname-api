@@ -55,7 +55,9 @@ jobs:
         uses: jfrog/setup-jfrog-cli@v2
 
       - name: Ping and Download artifact
+        shell: bash
         run: |
+          set -x
           jf --version
           jf c add --user=${{ secrets.ARTIFACTORY_USER }} --access-token=${{ secrets.ARTIFACTORY_PASSWORD }} --url=${{ secrets.ARTIFACTORY_CONTEXTURL }}
           jf rt ping
