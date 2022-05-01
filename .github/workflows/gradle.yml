@@ -40,8 +40,8 @@ jobs:
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         run: |
           mkdir -p ~/.gradle
-          echo -e artifactory_contextUrl=$ARTIFACTORY_CONTEXTURL'\n' > ~/.gradle/gradle.properties
-          echo -e artifactory_user=$ARTIFACTORY_USER'\n' >> ~/.gradle/gradle.properties
+          echo -e artifactory_contextUrl=$ARTIFACTORY_CONTEXTURL > ~/.gradle/gradle.properties
+          echo -e artifactory_user=$ARTIFACTORY_USER >> ~/.gradle/gradle.properties
           echo -e artifactory_password=$ARTIFACTORY_PASSWORD >> ~/.gradle/gradle.properties
           cat ~/.gradle/gradle.properties
 
