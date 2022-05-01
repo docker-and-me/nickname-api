@@ -47,3 +47,15 @@ jobs:
 
       - name: Publish to artifactory
         run: ./gradlew artifactoryPublish
+
+  artifactory:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup JFrog cli
+        uses: jfrog/setup-jfrog-cli@v2
+        env:
+          JF_ENV_USER: ${{ secrets.ARTIFACTORY_USER }}
+          JF_ENV_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+
+      - name: Ping server
+        run: jf rt ping
