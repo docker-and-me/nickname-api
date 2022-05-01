@@ -17,10 +17,6 @@ group = 'com.container.app'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
-springBoot {
-	buildInfo()
-}
-
 artifactory {
 	contextUrl = artifactory_contextUrl   //The base Artifactory URL if not overridden by the publisher/resolver
 	publish {

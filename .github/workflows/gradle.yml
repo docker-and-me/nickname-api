@@ -53,3 +53,14 @@ jobs:
     steps:
       - name: Setup JFrog cli
         uses: jfrog/setup-jfrog-cli@v2
+
+      - name: Ping and Download artifact
+        env:
+          ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
+          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+        run: |
+          jf config add --user=$ARTIFACTORY_USER --access-token=$ARTIFACTORY_PASSWORD --url=$ARTIFACTORY_CONTEXTURL
+          jf rt ping
+          jf rt dl *.jar --sort-by=created --sort-order=desc --limit=1
+
