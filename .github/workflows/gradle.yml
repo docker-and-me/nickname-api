@@ -60,4 +60,6 @@ jobs:
         run: |
           set -x
           jf rt ping
+          jf rt dl --sort-by=created --sort-order=desc --limit=1 myrestapp-*.jar
+          ls -lR | grep jar
 
