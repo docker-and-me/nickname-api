@@ -51,14 +51,11 @@ jobs:
   artifactory:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup JFrog cli
+      - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v2
+        env:
+          JF_ENV_1: ${{ secrets.ARTIFACTORY_USER }}
 
-      - name: Ping and Download artifact
-        shell: bash
-        run: |
-          set -x
-          jf --version
-          jf c add --user=${{ secrets.ARTIFACTORY_USER }} --access-token=${{ secrets.ARTIFACTORY_PASSWORD }} --url=${{ secrets.ARTIFACTORY_CONTEXTURL }}
-          jf rt ping --user=${{ secrets.ARTIFACTORY_USER }} --access-token=${{ secrets.ARTIFACTORY_PASSWORD }} --url=${{ secrets.ARTIFACTORY_CONTEXTURL }}
+      - name: Ping JFrog CLI
+        run: jf rt ping
 
