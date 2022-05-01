@@ -54,7 +54,7 @@ jobs:
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v2
         env:
-          JF_ENV_1: ${{ secrets.ARTIFACTORY_USER }}
+          JF_ENV_1: ${{ secrets.$ARTIFACTORY_PASSWORD }}
 
       - name: Ping JFrog CLI
         run: |
