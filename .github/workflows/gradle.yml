@@ -30,9 +30,7 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
-
-
-      - name: Show environment variables
+      - name: Setup artifactory properties
         shell: bash
         env:
           ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
@@ -43,14 +41,9 @@ jobs:
           echo -e artifactory_contextUrl=$ARTIFACTORY_CONTEXTURL > ~/.gradle/gradle.properties
           echo -e artifactory_user=$ARTIFACTORY_USER >> ~/.gradle/gradle.properties
           echo -e artifactory_password=$ARTIFACTORY_PASSWORD >> ~/.gradle/gradle.properties
-          cat ~/.gradle/gradle.properties
 
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - uses: jfrog/setup-jfrog-cli@v2
-        env:
-          JF_ENV_ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
-      - run: |
-          # Ping the server
-          jf rt ping
+      - name: Publish to artifactory
+        run: /gradlew artifactoryPublish
