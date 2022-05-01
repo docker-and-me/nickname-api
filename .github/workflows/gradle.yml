@@ -60,5 +60,5 @@ jobs:
           set -x
           jf --version
           jf c add --user=${{ secrets.ARTIFACTORY_USER }} --access-token=${{ secrets.ARTIFACTORY_PASSWORD }} --url=${{ secrets.ARTIFACTORY_CONTEXTURL }}
-          jf rt ping
+          jf rt ping --user=${{ secrets.ARTIFACTORY_USER }} --access-token=${{ secrets.ARTIFACTORY_PASSWORD }} --url=${{ secrets.ARTIFACTORY_CONTEXTURL }}
 
