@@ -46,4 +46,4 @@ jobs:
         run: ./gradlew clean build
 
       - name: Publish to artifactory
-        run: /gradlew artifactoryPublish
+        run: ./gradlew artifactoryPublish
