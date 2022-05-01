@@ -53,12 +53,10 @@ jobs:
     steps:
       - name: Setup JFrog cli
         uses: jfrog/setup-jfrog-cli@v2
-        env:
-          JF_ENV_1: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
-          JF_ENV_2: ${{ secrets.ARTIFACTORY_USER }}
-          JF_ENV_3: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
       - name: Ping and Download artifact
         run: |
+          jf --version
+          jf c add --user=${{ secrets.ARTIFACTORY_USER }} --access-token=${{ secrets.ARTIFACTORY_PASSWORD }} --url=${{ secrets.ARTIFACTORY_CONTEXTURL }}
           jf rt ping
 
