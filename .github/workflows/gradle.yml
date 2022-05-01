@@ -54,9 +54,9 @@ jobs:
       - name: Setup JFrog cli
         uses: jfrog/setup-jfrog-cli@v2
         env:
-          JF_ENV_ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
-          JF_ENV_ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
-          JF_ENV_ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
+          JF_ENV_1: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
+          JF_ENV_2: ${{ secrets.ARTIFACTORY_USER }}
+          JF_ENV_3: ${{ secrets.ARTIFACTORY_PASSWORD }}
 
       - name: Ping and Download artifact
         run: |
