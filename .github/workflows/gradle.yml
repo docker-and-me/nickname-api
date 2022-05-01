@@ -36,9 +36,13 @@ jobs:
         shell: bash
         env:
           ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
+          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
+          ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         run: |
           mkdir -p ~/.gradle
-          echo artifactory_contextUrl=$ARTIFACTORY_CONTEXTURL > ~/.gradle/gradle.properties
+          echo -e artifactory_contextUrl=$ARTIFACTORY_CONTEXTURL'\n' > ~/.gradle/gradle.properties
+          echo -e artifactory_user=$ARTIFACTORY_USER'\n' >> ~/.gradle/gradle.properties
+          echo -e artifactory_password=$ARTIFACTORY_PASSWORD >> ~/.gradle/gradle.properties
           cat ~/.gradle/gradle.properties
 
       - name: Build with Gradle
