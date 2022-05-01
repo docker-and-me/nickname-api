@@ -37,8 +37,9 @@ jobs:
         env:
           ARTIFACTORY_CONTEXTURL: ${{ secrets.ARTIFACTORY_CONTEXTURL }}
         run: |
-          echo value = $ARTIFACTORY_CONTEXTURL
-          echo user -> ${{ secrets.DOCKER_HUB_USERNAME }}
+          mkdir -p ~/.gradle
+          echo artifactory_contextUrl=$ARTIFACTORY_CONTEXTURL > ~/.gradle/gradle.properties
+          cat ~/.gradle/gradle.properties
 
       - name: Build with Gradle
         run: ./gradlew clean build
