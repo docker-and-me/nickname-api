@@ -60,6 +60,6 @@ jobs:
           ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
           ARTIFACTORY_PASSWORD: ${{ secrets.ARTIFACTORY_PASSWORD }}
         run: |
-          jf config add --user=$ARTIFACTORY_USER --access-token=$ARTIFACTORY_PASSWORD --url=$ARTIFACTORY_CONTEXTURL
+          jf config add --user=${{ secrets.ARTIFACTORY_USER }} --access-token=${{ secrets.ARTIFACTORY_PASSWORD }} --url=${{ secrets.ARTIFACTORY_CONTEXTURL }}
           jf rt ping
 
