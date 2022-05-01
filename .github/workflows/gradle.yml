@@ -62,5 +62,4 @@ jobs:
         run: |
           jf config add --user=$ARTIFACTORY_USER --access-token=$ARTIFACTORY_PASSWORD --url=$ARTIFACTORY_CONTEXTURL
           jf rt ping
-          jf rt dl *.jar --sort-by=created --sort-order=desc --limit=1
 
