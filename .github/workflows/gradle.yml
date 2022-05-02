@@ -60,12 +60,12 @@ jobs:
       - name: Download artifact
         run:
           jf rt dl --sort-by=created --sort-order=desc --limit=1 *.jar
-          
+
       - name: Move jar
         run: |
           set -x
           mkdir -p ./build/libs/
-          mv $(locate $(ls -R | grep myrestapp-0.0.1-2022*.*jar)) ./build/libs/myrestapp-0.0.1-SNAPSHOT-1.jar
+          mv $(find -iname 'myrestapp-0.0.1-*.jar') ./build/libs/myrestapp-0.0.1-SNAPSHOT.jar
           cd ./build/libs/
           ls -l
 
