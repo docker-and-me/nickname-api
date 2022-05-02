@@ -49,6 +49,7 @@ jobs:
         run: ./gradlew artifactoryPublish
 
   artifactory:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Setup JFrog CLI
@@ -61,5 +62,5 @@ jobs:
           set -x
           jf rt ping
           jf rt dl --sort-by=created --sort-order=desc --limit=1 *.jar
-          ls -lR | grep jar
+          ls -lR
 
