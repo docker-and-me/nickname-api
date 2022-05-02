@@ -63,9 +63,25 @@ jobs:
 
       - name: Move jar
         run: |
-          set -x
           mkdir -p ./build/libs/
           mv $(find -iname 'myrestapp-0.0.1-*.jar') ./build/libs/myrestapp-0.0.1-SNAPSHOT.jar
-          cd ./build/libs/
-          ls -l
 
+      - name: Set Docker image tag
+        shell: bash
+        run: |
+          if [ ${GITHUB_REF##*/} == "master" ]
+          then
+            echo "DOCKER_TAG=latest" >> $GITHUB_ENV
+          else
+            echo "DOCKER_TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          fi
+          echo value = ${GITHUB_REF##*/}
+
+      - name: Build & push Docker image
+        uses: mr-smithers-excellent/docker-build-push@v5
+        with:
+          image: tj1283/nickname-app
+          tags: ${{ env.DOCKER_TAG }}
+          registry: docker.io
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
