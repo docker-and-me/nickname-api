@@ -57,10 +57,15 @@ jobs:
         env:
           JF_ENV_1: ${{ secrets.ARTIFACTORY_CONFIG_TOKEN }}
 
-      - name: Ping JFrog CLI
+      - name: Download artifact
+        run:
+          jf rt dl --sort-by=created --sort-order=desc --limit=1 *.jar
+          
+      - name: Move jar
         run: |
           set -x
-          jf rt ping
-          jf rt dl --sort-by=created --sort-order=desc --limit=1 *.jar
-          ls -lR
+          mkdir -p ./build/libs/
+          mv $(locate $(ls -R | grep myrestapp-0.0.1-2022*.*jar)) ./build/libs/myrestapp-0.0.1-SNAPSHOT-1.jar
+          cd ./build/libs/
+          ls -l
 
