@@ -52,6 +52,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Setup JFrog CLI
         uses: jfrog/setup-jfrog-cli@v2
         env:
@@ -66,9 +69,6 @@ jobs:
           mkdir -p ./build/libs/
           mv $(find -iname 'myrestapp-0.0.1-*.jar') ./build/libs/myrestapp-0.0.1-SNAPSHOT.jar
 
-      - name: Checkout repo
-        uses: actions/checkout@v3
-        
       - name: Set Docker image tag
         shell: bash
         run: |
@@ -79,6 +79,9 @@ jobs:
             echo "DOCKER_TAG=${GITHUB_REF##*/}" >> $GITHUB_ENV
           fi
           echo value = ${GITHUB_REF##*/}
+
+      - name: check files
+        run: ls -lR
 
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
