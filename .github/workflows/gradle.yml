@@ -80,9 +80,6 @@ jobs:
           fi
           echo value = ${GITHUB_REF##*/}
 
-      - name: check files
-        run: ls -lR
-
       - name: Build & push Docker image
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
