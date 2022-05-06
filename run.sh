@@ -1,0 +1,1 @@
+docker run -d --name scramblerapi -p 8080 --net=skynet rest-app:dev

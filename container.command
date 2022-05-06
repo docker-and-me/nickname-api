@@ -1,1 +1,0 @@
-docker run -d --name scramblerapi -p 8080 rest-app:dev
